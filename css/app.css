@@ -42,7 +42,7 @@ h1 {
 }
 
 /*
- * Styles for the deck of cards
+ * Styles for the deck of mcards
  */
 
 .deck {
@@ -59,10 +59,11 @@ h1 {
     margin: 0 0 3em;
 }
 
-.deck .card {
+.deck .mcard {
+	display: inline;
     height: 125px;
     width: 125px;
-    background-image: url(../img/memory-card.png);
+    background-image: url(../img/memory-mcard.png);
 	background-size: 125px 125px;
     font-size: 0;
     color: #ffffff;
@@ -72,17 +73,17 @@ h1 {
     align-items: center;
 }
 
-.deck .card.open {
+.deck .mcard.open {
     transform: rotateY(0);
     background: #32cd32;
     cursor: default;
 }
 
-.deck .card.show {
+.deck .mcard.show {
     font-size: 33px;
 }
 
-.deck .card.match {
+.deck .mcard.match {
     cursor: default;
     background: #008000;
     font-size: 33px;
