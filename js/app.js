@@ -6,11 +6,11 @@ let cardArray= ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-
 
 let cards = document.getElementsByClassName("mcard");
 
-let score = document.getElementByClassName("moves");
+let score = document.getElementsByClassName("moves");
 
-let star = document.getElementByClassName("stars");
+let star = document.getElementsByClassName("stars");
 
-let timer = document.getElementByClassName("time");
+let timer = document.getElementsByClassName("time");
 
 /*
  * Display the cards on the page

@@ -42,6 +42,22 @@ h1 {
 }
 
 /*
+* Styles for Start button
+*/
+
+.start{
+	background-color: #008000;
+	border: 2px solid #003300;
+	border-radius: 25px;
+	color: #ffd700;
+	padding: 15px;
+	text-align: center;
+	display: inline-block;
+	font-size: 2em;
+}
+
+
+/*
  * Styles for the deck of mcards
  */
 
