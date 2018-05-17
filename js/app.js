@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function(event) {});
  */
 let cardArray= ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
 
+let cards = document.getElementsByClassName("mcard");
+
+let score = document.getElementByClassName("moves");
+
+let star = document.getElementByClassName("stars");
+
+let timer = document.getElementByClassName("time");
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
