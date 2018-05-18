@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/circuitbackground.jpg');\
+    background: #ffffff url('../img/circuitbackground.jpg');
 	background-size: contain;
     font-family: 'Press Start 2P', cursive;
 	color: #ffd700;
