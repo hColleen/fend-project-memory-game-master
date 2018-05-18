@@ -19,7 +19,8 @@ let timer = document.getElementsByClassName("time");
  *   - add each card's HTML to the page
  */
 
- document.getElementsByClassName("deck").append("<li class='mcard'><i class='fas'></i></li>");
+$("deck").append("<li class='mcard'><i class='fas'></i></li>");
+
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
