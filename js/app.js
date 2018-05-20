@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {});
 /*
  * Create a list that holds all of your cards
  */
-let cardArray = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
+let cardArray = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
 
 let cards = document.getElementsByClassName("mcard");
 
