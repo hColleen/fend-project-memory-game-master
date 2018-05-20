@@ -12,6 +12,8 @@ let star = document.getElementsByClassName("stars");
 
 let timer = document.getElementsByClassName("time");
 
+let tilesFlipped = 0;
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
