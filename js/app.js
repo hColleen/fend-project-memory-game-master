@@ -14,7 +14,13 @@ let star = document.getElementsByClassName("stars");
 
 let timer = document.getElementsByClassName("time");
 
-let tilesFlipped = 0;
+let cardsFlipped = 0;
+
+let flippedCards = [];
+
+let moves = 0;
+
+let matches = 0;
 
 /*
  * Display the cards on the page
@@ -53,7 +59,7 @@ shuffle(cardArray);
  */
  
  function createDeck(){
-	 tilesFlipped = 0;
+	 cardsFlipped = 0;
 	 let output = '';
 	 cardArray;
 	 for (let i = 0; i < cardArray.length; i++){
@@ -61,4 +67,24 @@ shuffle(cardArray);
 	 }
 	 $(".deck").innerHTML = output;
 }
+ 
  createDeck();
+ 
+ function flipCards(card, val){
+	 if($(".mcard").innerHTML == "" && tilesFlipped.length < 2){
+		 $(".mcard").addClass("open show");
+		 if (flippedCards.length > 2){
+			 flippedCards.push($(".mcard").innerHTML);
+		 } else if (flippedCards.length == 2){
+			 moves++;
+			 if (flippedCards[0] === flippedCards[1]){
+				 $(".mcard").addClass("match");
+				 matches += 2;
+				 flippedCards = []
+				 if (matches = cardArray.length){
+					 //modal
+				 }
+			 } else {
+				 $("mcard").removeClass("open show");
+				 flippedCards = []
+			 }
