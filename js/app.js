@@ -43,8 +43,6 @@ function shuffle(array) {
     return array;
 }
 
-shuffle(cardArray);
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -59,15 +57,15 @@ shuffle(cardArray);
  function createDeck(){
 	 cardsFlipped = 0;
 	 let output = '';
-	 cardArray;
+	 shuffle(cardArray);
 	 for (let i = 0; i < cardArray.length; i++){
-		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "></i></li>");
+		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "'></i></li>");
 	 }
 }
  
  createDeck();
  
- $(".mcard").click(function(){
+ $(".mcard").click(function flipCards(){
 	 if ($(".mcard").innerHTML == " " && flippedCards.length < 2){
 		 console.log("I'm in");
 		 $(".mcard").addClass("open show");
