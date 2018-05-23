@@ -63,9 +63,9 @@ shuffle(cardArray);
 	 let output = '';
 	 cardArray;
 	 for (let i = 0; i < cardArray.length; i++){
-		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "'></i></li>");
+		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "' onclick = 'flipCards(this,'"+cardArray[i]+"')'></i></li>");
 	 }
-	 $(".deck").innerHTML = output;
+	 //$(".deck").innerHTML = output;
 }
  
  createDeck();
@@ -88,3 +88,6 @@ shuffle(cardArray);
 				 $("mcard").removeClass("open show");
 				 flippedCards = []
 			 }
+		 }
+	 }
+ }
