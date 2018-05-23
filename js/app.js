@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", function(event) {});
  */
 let cardArray = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
 
-let cards = document.getElementsByClassName("mcard");
-
 let score = document.getElementsByClassName("moves");
 
 let star = document.getElementsByClassName("stars");
@@ -63,31 +61,34 @@ shuffle(cardArray);
 	 let output = '';
 	 cardArray;
 	 for (let i = 0; i < cardArray.length; i++){
-		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "' onclick = 'flipCards(this,'"+cardArray[i]+"')'></i></li>");
+		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "></i></li>");
 	 }
-	 //$(".deck").innerHTML = output;
 }
  
  createDeck();
  
- function flipCards(card, val){
-	 if($(".mcard").innerHTML == "" && tilesFlipped.length < 2){
+ $(".mcard").click(function(){
+	 if ($(".mcard").innerHTML == " " && flippedCards.length < 2){
+		 console.log("I'm in");
 		 $(".mcard").addClass("open show");
-		 if (flippedCards.length > 2){
-			 flippedCards.push($(".mcard").innerHTML);
-		 } else if (flippedCards.length == 2){
-			 moves++;
-			 if (flippedCards[0] === flippedCards[1]){
-				 $(".mcard").addClass("match");
-				 matches += 2;
-				 flippedCards = []
-				 if (matches = cardArray.length){
-					 //modal
+		 if (flippedCards.length == 0){
+			 flippedCards.push(val);
+		 } else if (flippedCards.length == 1){
+			 flippedCards.push(val);
+			 if (flippedCards[0] == flippedCards[1]){
+				 cards.addClass("match");
+				 matches +=2;
+				 flippedCards = [];
+				 if (matches == cardArray.length){
+					 alert("Board Cleared");
+				 } else {
+					 function flip2Back(){
+						 cards.removeClass("open show");
+						 flippedCards = [];
+						 setTimeout(flip2Back, 700);
+					 }
 				 }
-			 } else {
-				 $("mcard").removeClass("open show");
-				 flippedCards = []
 			 }
 		 }
 	 }
- }
+ });
