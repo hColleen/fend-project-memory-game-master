@@ -1,32 +1,19 @@
-//Tutorial from https://youtube.com/watch?v=c_ohDPWmsM0
+//Tutorial from https://youtube.com/watch?v=c_ohDPWmsM0 and http://www.developphp.com/video/JavaScript/Memory-Game-Programming-Tutorial
 
 document.addEventListener("DOMContentLoaded", function(event) {});
-/*
- * Create a list that holds all of your cards
- */
+
+//create card array with fa icons and define variables
+
 let cardArray = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
 
 let score = document.getElementsByClassName("moves");
-
 let star = document.getElementsByClassName("stars");
-
 let timer = document.getElementsByClassName("time");
-
 let cardsFlipped = 0;
-
 let flippedCards = [];
-
 let moves = 0;
-
 let matches = 0;
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
+let mcard = document.getElementsByClassName("mcard");
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -43,50 +30,43 @@ function shuffle(array) {
     return array;
 }
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+//shuffle cards and create deck
  
  function createDeck(){
 	 cardsFlipped = 0;
 	 let output = '';
 	 shuffle(cardArray);
 	 for (let i = 0; i < cardArray.length; i++){
-		 output += $(".deck").append("<li class='mcard'><i class='fas " + cardArray[i] + "'></i></li>");
+		 $(".deck").append('<li class="mcard" id = "tile_'+[i]+' "onclick ="flipCards(this,\' '+cardArray[i]+'\')"><i class="fas ' + cardArray[i] + '></i></li>');
 	 }
+	// $(".deck").innerHTML = output;
 }
- 
  createDeck();
  
- $(".mcard").click(function flipCards(){
-	 if ($(".mcard").innerHTML == " " && flippedCards.length < 2){
-		 console.log("I'm in");
-		 $(".mcard").addClass("open show");
+ //game play
+ 
+ function flipCards(tile,val){
+	 if (tile.innerHTML == "" && flippedCards.length < 2){
+		 tile.classList.add("open", "show");
 		 if (flippedCards.length == 0){
 			 flippedCards.push(val);
-		 } else if (flippedCards.length == 1){
-			 flippedCards.push(val);
-			 if (flippedCards[0] == flippedCards[1]){
-				 cards.addClass("match");
-				 matches +=2;
-				 flippedCards = [];
-				 if (matches == cardArray.length){
-					 alert("Board Cleared");
-				 } else {
-					 function flip2Back(){
-						 cards.removeClass("open show");
-						 flippedCards = [];
-						 setTimeout(flip2Back, 700);
-					 }
-				 }
-			 }
-		 }
+		} else if (flippedCards.length == 1){
+			flippedCards.push(val);
+			if (flippedCards[0] == flippedCards[1]){
+				matches +=2;
+				moves ++;
+				flippedCards = [];
+				if (matches == cardArray.length){
+					alert("Board cleared");
+				} else {
+					function flip2back(){
+						flippedCards[0].removeClass('open show');
+						flippedCards[1].removeClass('open show');
+						flippedCards = [];
+					}
+						setTimeout(flip2back, 500);
+				}
+			}
+		}
 	 }
- });
+ }
