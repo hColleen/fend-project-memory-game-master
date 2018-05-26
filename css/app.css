@@ -42,7 +42,7 @@ h1 {
 }
 
 /*
- * Styles for the deck of mcards
+ * Styles for the deck of cards
  */
 
 .deck {
@@ -59,7 +59,7 @@ h1 {
     margin: 0 0 3em;
 }
 
-.deck .mcard {
+.deck .card {
 	display: inline;
     height: 125px;
     width: 125px;
@@ -73,17 +73,17 @@ h1 {
     align-items: center;
 }
 
-.deck .mcard.open {
+.deck .card.open {
     transform: rotateY(0);
     background: #32cd32;
     cursor: default;
 }
 
-.deck .mcard.show {
+.deck .card.show {
     font-size: 33px;
 }
 
-.deck .mcard.match {
+.deck .card.match {
     cursor: default;
     background: #008000;
     font-size: 33px;

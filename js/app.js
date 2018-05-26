@@ -2,14 +2,14 @@
 
 //create card array with fa icons and define variables
 
-let cardArray = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
+var cards = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
 
 
-let star = document.getElementsByClassName("stars");
-let timer = document.getElementsByClassName("time");
-let cardsFlipped = 0;
-let matches = 0;
-
+var star = document.querySelector(".stars");
+var timer = document.querySelector(".time");
+var cardsFlipped = 0;
+var score = document.querySelector(".moves");
+var reset = document.querySelector(".restart");
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -28,26 +28,61 @@ function shuffle(array) {
 
 //shuffle cards and create deck
  
- function createDeck(card){
-	 return '<li class = "mcard" data-card = "${card}"><i class = "fas ${card}"></i></li>';
+ function generateCard(card){
+	 return `<li class = "card" data-card = "${card}"><i class = "fas ${card}"></i></li>`;
 	 }
  
  //game play
  
 function initGame(){
-	let deck = document.querySelector(".deck");
-	let score = document.querySelector(".moves");
+	var deck = document.querySelector(".deck");
+	var score = document.querySelector(".moves");
 	
-	let cardHTML = shuffle(cardArray).map(function(card){
-		return createDeck(card);
+	var cardHTML = shuffle(cards).map(function(card) {
+		return generateCard(card);
 	});
 	moves = 0;
 	score.innerText = moves;
+	
 	deck.innerHTML = cardHTML.join('');
 }
 
-let allCards = document.querySelectorAll(".mcard");
-let flippedCards = [];
-let moves = 0;
 
 initGame();
+
+var allCards = document.querySelectorAll(".card");
+var openCards = [];
+var moves = 0;
+
+allCards.forEach(function(card){
+	card.addEventListener('click', function(e){
+
+		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
+			
+			card.classList.add('open', 'show');
+			openCards.push(card);
+			
+			if (openCards.length == 2){
+				if (openCards[0].dataset.card == openCards[1].dataset.card){
+					openCards[0].classList.add('match');
+					openCards[1].classList.add('match');
+					cardsFlipped += 2;
+					openCards = [];
+				} else {
+					setTimeout(function(){
+						openCards.forEach(function(card){
+							card.classList.remove('open', 'show');
+						});
+						openCards = [];
+					}, 700);
+				}
+				moves += 1;
+				score.innerText = moves;
+			}
+		}
+	});
+});
+
+reset.addEventListener('click', function(event){
+	initGame();
+});
