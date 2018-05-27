@@ -9,6 +9,9 @@ var score = document.querySelector(".moves");
 var reset = document.querySelector(".restart");
 var openCards = [];
 var moves = 0;
+var time;
+var timerCount = false;
+var seconds = 0;
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -39,9 +42,20 @@ function initGame(){
 	});
 	moves = 0;
 	score.innerText = moves;
-	
+	seconds = 0;
+	timer.innerHTML = seconds;
+	timerCount = false;
 	deck.innerHTML = cardHTML.join('');
 }
+
+//timer
+function countTime(){
+	timerCount = true;
+	time = setInterval(function(){
+		timer.innerHTML = seconds;
+		seconds ++;
+	}, 1000)
+};
 
 //create cards, set move counter and time to zero
 initGame();
@@ -55,7 +69,9 @@ allCards.forEach(function(card){
 	card.addEventListener('click', function(e){
 
 		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
-			
+			if (timerCount === false){
+				countTime()
+			}
 			card.classList.add('open', 'show');
 			openCards.push(card);
 			
