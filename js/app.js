@@ -56,6 +56,7 @@ function initGame(){
 	deck.innerHTML = cardHTML.join('');
 	playGame();
 	modal.style.display = "none";
+	cardsFlipped = 0;
 }
 
 //reset number of stars
@@ -85,11 +86,11 @@ function resetTime(){
 function winModalDisplay(){
 	modal.style.display = "block";
 	if (rate === 3){
-	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i>\r 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i><br /> 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
 	} else if (rate === 2){
-	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i>\r 2 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i><br /> 2 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
 	} else {
-	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i>\r 1 star rating <i class = "fas fa-star"></i>');
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i><br /> 1 star rating <i class = "fas fa-star"></i>');
 	}
 	close.onclick = function(){
 	modal.style.display = "none";
