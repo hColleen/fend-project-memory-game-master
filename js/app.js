@@ -13,6 +13,8 @@ var moves = 0;
 var time;
 var timerCount = false;
 var seconds = 0;
+var modal = document.getElementById("winModal");
+var close = document.getElementsByClassName("close")[0];
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
