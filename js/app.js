@@ -36,7 +36,7 @@ function generateCard(card){
  //generate cards, shuffle them, fill in timer, move counter
 function initGame(){
 	var deck = document.querySelector(".deck");
-	
+
 	var cardHTML = shuffle(cards).map(function(card) {
 		return generateCard(card);
 	});
@@ -44,7 +44,7 @@ function initGame(){
 	score.innerText = moves;
 	seconds = 0;
 	timer.innerHTML = seconds;
-	timerCount = false;
+	resetTime();
 	deck.innerHTML = cardHTML.join('');
 }
 
@@ -55,6 +55,13 @@ function countTime(){
 		timer.innerHTML = seconds;
 		seconds ++;
 	}, 1000)
+};
+
+function resetTime(){
+	clearInterval(time);
+	seconds = 0;
+	timer.innerHTML = seconds;
+	timerCount = false;
 };
 
 //create cards, set move counter and time to zero
