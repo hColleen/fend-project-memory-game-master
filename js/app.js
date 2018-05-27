@@ -55,6 +55,7 @@ function initGame(){
 	resetStar();
 	deck.innerHTML = cardHTML.join('');
 	playGame();
+	modal.style.display = "none";
 }
 
 //reset number of stars
@@ -62,7 +63,7 @@ function resetStar(){
 	star[0].style.visibility = "visible";
 	star[1].style.visibility = "visible";
 	rate = 3;
-};
+}
 
 //timer
 function countTime(){
@@ -70,8 +71,8 @@ function countTime(){
 	time = setInterval(function(){
 		timer.innerHTML = seconds;
 		seconds ++;
-	}, 1000)
-};
+	}, 1000);
+}
 
 //reset timer
 function resetTime(){
@@ -79,10 +80,26 @@ function resetTime(){
 	seconds = 0;
 	timer.innerHTML = seconds;
 	timerCount = false;
-};
+}
 
-//create cards, set move counter and time to zero
-initGame();
+function winModalDisplay(){
+	modal.style.display = "block";
+	if (rate === 3){
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i>\r 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
+	} else if (rate === 2){
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i>\r 2 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
+	} else {
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i>\r 1 star rating <i class = "fas fa-star"></i>');
+	}
+	close.onclick = function(){
+	modal.style.display = "none";
+	};
+	window.onclick = function(event){
+	if(event.target == modal){
+		modal.style.display = "none";
+		}
+	};
+}
 
 //game play function
 function playGame(){
@@ -92,55 +109,36 @@ function playGame(){
 		card.addEventListener('click', function(e){
 			//check if card open, or matched
 			if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
-				//start timer if not started
-				if (timerCount === false){
-					countTime()
-				}
-				//show cards
-				card.classList.add('open', 'show');
-				openCards.push(card);
-				//if two cards open, compare
-				if (openCards.length == 2){
-					if (openCards[0].dataset.card == openCards[1].dataset.card){
-						openCards[0].classList.add('match');
-						openCards[1].classList.add('match');
-						cardsFlipped += 2;
-						openCards = [];
-						
-						//check game end state
-						if (cardsFlipped === cards.length){
-							clearInterval(time);
-							modal.style.display = "block";
-							if (rate === 3){
-								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i>\r 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
-							} else if (rate === 2){
-								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i>\r 2 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
-							} else {
-								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i>\r 1 star rating <i class = "fas fa-star"></i>');
-							}
-							close.onclick = function(){
-								modal.style.display = "none";
-							}
-							window.onclick = function(event){
-								if(event.target == modal){
-									modal.style.display = "none";
-								}
-							}
-							modalRestart.addEventListener('click', function(event){
-								initGame();
-								modal.style.display = "none";
-							});
-						}
-					} else {
-						//flip cards back
-						setTimeout(function(){
-							openCards.forEach(function(card){
-								card.classList.remove('open', 'show');
-							});
-							openCards = [];
-						}, 700);
+					//start timer if not started
+					if (timerCount === false){
+						countTime();
 					}
-					
+					//show cards
+					card.classList.add('open', 'show');
+					openCards.push(card);
+					//if two cards open, compare
+					if (openCards.length == 2){
+						if (openCards[0].dataset.card == openCards[1].dataset.card){
+							openCards[0].classList.add('match');
+							openCards[1].classList.add('match');
+							cardsFlipped += 2;
+							openCards = [];
+							
+							//check game end state
+							if (cardsFlipped === cards.length){
+								clearInterval(time);
+								winModalDisplay();
+							}
+						} else {
+							//flip cards back
+							setTimeout(function(){
+								openCards.forEach(function(card){
+									card.classList.remove('open', 'show');
+								});
+								openCards = [];
+							}, 700);
+						}
+						
 					//move counter an star ranking
 					moves += 1;
 					score.innerText = moves;
@@ -156,9 +154,16 @@ function playGame(){
 			}
 		});
 	});
+}
+
+//create cards, set move counter and time to zero
+initGame();
 
 	//reset game
 	reset.addEventListener('click', function(event){
 		initGame();
 	});
-};
+	
+	modalRestart.addEventListener('click', function(event){
+		initGame();
+	});
