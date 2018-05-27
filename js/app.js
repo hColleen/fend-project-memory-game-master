@@ -1,15 +1,14 @@
 //Tutorial from https://www.youtube.com/watch?v=_rUH-sEs68Y&feature=youtu.be
 
 //create card array with fa icons and define variables
-
 var cards = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
-
-
 var star = document.querySelector(".stars");
 var timer = document.querySelector(".time");
 var cardsFlipped = 0;
 var score = document.querySelector(".moves");
 var reset = document.querySelector(".restart");
+var openCards = [];
+var moves = 0;
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -26,17 +25,14 @@ function shuffle(array) {
     return array;
 }
 
-//shuffle cards and create deck
- 
- function generateCard(card){
+//create HTML for cards
+function generateCard(card){
 	 return `<li class = "card" data-card = "${card}"><i class = "fas ${card}"></i></li>`;
-	 }
- 
- //game play
- 
+}
+
+ //generate cards, shuffle them, fill in timer, move counter
 function initGame(){
 	var deck = document.querySelector(".deck");
-	var score = document.querySelector(".moves");
 	
 	var cardHTML = shuffle(cards).map(function(card) {
 		return generateCard(card);
@@ -47,13 +43,14 @@ function initGame(){
 	deck.innerHTML = cardHTML.join('');
 }
 
-
+//create cards, set move counter and time to zero
 initGame();
 
-var allCards = document.querySelectorAll(".card");
-var openCards = [];
-var moves = 0;
 
+//create all card variable after cards are created
+var allCards = document.querySelectorAll(".card");
+
+//game play function
 allCards.forEach(function(card){
 	card.addEventListener('click', function(e){
 
@@ -83,6 +80,7 @@ allCards.forEach(function(card){
 	});
 });
 
+//reset game
 reset.addEventListener('click', function(event){
 	initGame();
 });
