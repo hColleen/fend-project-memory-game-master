@@ -1,4 +1,5 @@
 //Tutorial from https://www.youtube.com/watch?v=_rUH-sEs68Y&feature=youtu.be
+//Modal styling from https://www.w3schools.com/howto/howto_css_modals.asp
 
 //create card array with fa icons and define variables
 var cards = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
@@ -15,6 +16,8 @@ var timerCount = false;
 var seconds = 0;
 var modal = document.getElementById("winModal");
 var close = document.getElementsByClassName("close")[0];
+var modalText = document.querySelector("#modalText");
+
  
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -101,6 +104,22 @@ function playGame(){
 						openCards = [];
 						if (cardsFlipped === cards.length){
 							clearInterval(time);
+							modal.style.display = "block";
+							if (rate === 3){
+								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i>');
+							} else if (rate === 2){
+								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i>');
+							} else {
+								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i>');
+							}
+							close.onclick = function(){
+								modal.style.display = "none";
+							}
+							window.onclick = function(event){
+								if(event.target == modal){
+									modal.style.display = "none";
+								}
+							}
 						}
 					} else {
 						setTimeout(function(){
