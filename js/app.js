@@ -51,11 +51,12 @@ function initGame(){
 	playGame();
 }
 
-	function resetStar(){
-		star[0].style.visibility = "visible";
-		star[1].style.visibility = "visible";
-		rate = 3;
-	};
+//reset number of stars
+function resetStar(){
+	star[0].style.visibility = "visible";
+	star[1].style.visibility = "visible";
+	rate = 3;
+};
 
 //timer
 function countTime(){
@@ -96,6 +97,9 @@ function playGame(){
 						openCards[1].classList.add('match');
 						cardsFlipped += 2;
 						openCards = [];
+						if (cardsFlipped === cards.length){
+							clearInterval(time);
+						}
 					} else {
 						setTimeout(function(){
 							openCards.forEach(function(card){
