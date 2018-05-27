@@ -46,6 +46,7 @@ function initGame(){
 	timer.innerHTML = seconds;
 	resetTime();
 	deck.innerHTML = cardHTML.join('');
+	playGame();
 }
 
 //timer
@@ -67,43 +68,43 @@ function resetTime(){
 //create cards, set move counter and time to zero
 initGame();
 
-
-//create all card variable after cards are created
-var allCards = document.querySelectorAll(".card");
-
 //game play function
-allCards.forEach(function(card){
-	card.addEventListener('click', function(e){
+function playGame(){
+	//create all card variable after cards are created
+	var allCards = document.querySelectorAll(".card");
+	allCards.forEach(function(card){
+		card.addEventListener('click', function(e){
 
-		if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
-			if (timerCount === false){
-				countTime()
-			}
-			card.classList.add('open', 'show');
-			openCards.push(card);
-			
-			if (openCards.length == 2){
-				if (openCards[0].dataset.card == openCards[1].dataset.card){
-					openCards[0].classList.add('match');
-					openCards[1].classList.add('match');
-					cardsFlipped += 2;
-					openCards = [];
-				} else {
-					setTimeout(function(){
-						openCards.forEach(function(card){
-							card.classList.remove('open', 'show');
-						});
-						openCards = [];
-					}, 700);
+			if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
+				if (timerCount === false){
+					countTime()
 				}
-				moves += 1;
-				score.innerText = moves;
+				card.classList.add('open', 'show');
+				openCards.push(card);
+				
+				if (openCards.length == 2){
+					if (openCards[0].dataset.card == openCards[1].dataset.card){
+						openCards[0].classList.add('match');
+						openCards[1].classList.add('match');
+						cardsFlipped += 2;
+						openCards = [];
+					} else {
+						setTimeout(function(){
+							openCards.forEach(function(card){
+								card.classList.remove('open', 'show');
+							});
+							openCards = [];
+						}, 700);
+					}
+					moves += 1;
+					score.innerText = moves;
+				}
 			}
-		}
+		});
 	});
-});
 
-//reset game
-reset.addEventListener('click', function(event){
-	initGame();
-});
+	//reset game
+	reset.addEventListener('click', function(event){
+		initGame();
+	});
+};
