@@ -2,7 +2,8 @@
 
 //create card array with fa icons and define variables
 var cards = ["fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt", "fa-database", "fa-desktop", "fa-keyboard", "fa-microchip", "fa-save", "fa-laptop", "fa-server", "fa-mobile-alt"];
-var star = document.querySelector(".stars");
+var star = document.querySelectorAll(".fa-star");
+var rate = 3;
 var timer = document.querySelector(".time");
 var cardsFlipped = 0;
 var score = document.querySelector(".moves");
@@ -45,9 +46,16 @@ function initGame(){
 	seconds = 0;
 	timer.innerHTML = seconds;
 	resetTime();
+	resetStar();
 	deck.innerHTML = cardHTML.join('');
 	playGame();
 }
+
+	function resetStar(){
+		star[0].style.visibility = "visible";
+		star[1].style.visibility = "visible";
+		rate = 3;
+	};
 
 //timer
 function countTime(){
@@ -98,6 +106,14 @@ function playGame(){
 					}
 					moves += 1;
 					score.innerText = moves;
+					if (moves > 16){
+						star[0].style.visibility = "hidden";
+						rate = 2;
+					}
+					if (moves > 24){
+						star[1].style.visibility = "hidden";
+						rate = 1;
+					}
 				}
 			}
 		});
