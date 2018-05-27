@@ -17,6 +17,7 @@ var seconds = 0;
 var modal = document.getElementById("winModal");
 var close = document.getElementsByClassName("close")[0];
 var modalText = document.querySelector("#modalText");
+var modalRestart = document.querySelector(".modalRestart");
 
  
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -39,7 +40,7 @@ function generateCard(card){
 	 return `<li class = "card" data-card = "${card}"><i class = "fas ${card}"></i></li>`;
 }
 
- //generate cards, shuffle them, fill in timer, move counter
+ //generate cards, shuffle them, reset timer, move counter, and rating
 function initGame(){
 	var deck = document.querySelector(".deck");
 
@@ -72,6 +73,7 @@ function countTime(){
 	}, 1000)
 };
 
+//reset timer
 function resetTime(){
 	clearInterval(time);
 	seconds = 0;
@@ -88,29 +90,33 @@ function playGame(){
 	var allCards = document.querySelectorAll(".card");
 	allCards.forEach(function(card){
 		card.addEventListener('click', function(e){
-
+			//check if card open, or matched
 			if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
+				//start timer if not started
 				if (timerCount === false){
 					countTime()
 				}
+				//show cards
 				card.classList.add('open', 'show');
 				openCards.push(card);
-				
+				//if two cards open, compare
 				if (openCards.length == 2){
 					if (openCards[0].dataset.card == openCards[1].dataset.card){
 						openCards[0].classList.add('match');
 						openCards[1].classList.add('match');
 						cardsFlipped += 2;
 						openCards = [];
+						
+						//check game end state
 						if (cardsFlipped === cards.length){
 							clearInterval(time);
 							modal.style.display = "block";
 							if (rate === 3){
-								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i>');
+								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i>\r 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
 							} else if (rate === 2){
-								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i>');
+								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i>\r 2 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
 							} else {
-								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i>');
+								modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need more memory <i class = "fas fa-memory"></i>\r 1 star rating <i class = "fas fa-star"></i>');
 							}
 							close.onclick = function(){
 								modal.style.display = "none";
@@ -120,8 +126,13 @@ function playGame(){
 									modal.style.display = "none";
 								}
 							}
+							modalRestart.addEventListener('click', function(event){
+								initGame();
+								modal.style.display = "none";
+							});
 						}
 					} else {
+						//flip cards back
 						setTimeout(function(){
 							openCards.forEach(function(card){
 								card.classList.remove('open', 'show');
@@ -129,6 +140,8 @@ function playGame(){
 							openCards = [];
 						}, 700);
 					}
+					
+					//move counter an star ranking
 					moves += 1;
 					score.innerText = moves;
 					if (moves > 16){
