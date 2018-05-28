@@ -64,7 +64,7 @@ h1 {
     height: 125px;
     width: 125px;
     background-image: url(../img/memory-card.png);
-	background-size: 125px 125px;
+	background-size: cover;
     font-size: 0;
     color: #ffffff;
     cursor: pointer;
@@ -145,4 +145,27 @@ h1 {
 	float: right;
 	font-size: 33px;
 	font-weight: bold;
+}
+
+@media screen and (max-width: 640px) {
+	.deck {
+			width: 400px;
+			min-height: 420px;
+	}
+	.deck .card{
+			height: 75px;
+			width: 75px;
+	}
+	.deck .card.show{
+			font-size: 20px;
+	}
+	.modal{
+			font-size: 20px;
+	}
+	.close{
+			font-size: 20px;
+	}
+	.score-panel{
+		width: 400px;
+	}
 }
