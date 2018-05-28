@@ -18,3 +18,11 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Dependancies
+
+This version of the game uses Font Awesome version 5.0.13 for icons and Press Start 2P font from Google Appis.  The browser must also support template literals and forEach (must be a modern browser).
+
+## Instructions
+
+Click two tiles. If they match, they will remain turned over. If they do not match, they will be flipped back over. When all tiles are matched, you will recieve a popup informing you of the time taken and your star rating. Click reset at any time to start over.
