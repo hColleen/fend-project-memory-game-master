@@ -86,7 +86,7 @@ function resetTime(){
 function winModalDisplay(){
 	modal.style.display = "block";
 	if (rate === 3){
-	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super haddrive <i class = "fas fa-hdd"></i><br /> 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
+	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You\'ve got a super harddrive <i class = "fas fa-hdd"></i><br /> 3 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
 	} else if (rate === 2){
 	modalText.innerHTML = ('You cleared the board in '+seconds+' seconds. You might need an upgrade <i class = "fas fa-download"></i><br /> 2 star rating <i class = "fas fa-star"></i> <i class = "fas fa-star"></i>');
 	} else {
